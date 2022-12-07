@@ -1,62 +1,68 @@
-//This function generates one of three choices for the computer to pick
-function getComputerChoice (...choices) {
-    return choices[Math.floor(Math.random()*choices.length)]
-
-}
 const choices = ['rock', 'paper', 'scissors']
-let computerSelection = getComputerChoice(...choices)
-console.log(computerSelection)
 
-let playerSelection = prompt('Choose...').toLowerCase()
+let computerSelection;
+let playerSelection;
 
 let playerScore = 0
 let computerScore = 0
+
+function getComputerChoice (...choices) {
+    return choices[Math.floor(Math.random()*choices.length)]
+}
+
+
 function playRound (playerSelection, computerSelection) {
 
-    if (playerSelection === computerSelection) {
-        return 'tie'
-    } else if (playerSelection === 'rock') {
-        if (computerSelection === 'scissors') {
-            ++ playerScore
-            //return 'player wins'
-        } else {
-            ++ computerScore
-            //return 'computer won'
-        }
-    }  else if (playerSelection === 'paper') {
-        if (computerSelection === 'rock') {
-            ++ playerScore
-            //return 'player wins'
-        } else {
-            ++ computerScore
-            //return 'computer won'
-        }
-    }  else if (playerSelection === 'scissors') {
-        if (computerSelection === 'paper') {
-            ++ playerScore
-            //return 'player wins'
-        } else {
-            ++ computerScore
-            //return 'computer won'
-        }
-    } else {
-        throw 'enter a valid choice'
-    }
-    }
+    computerSelection = getComputerChoice(...choices)
+    console.log('computer chooses', computerSelection)
+    playerSelection = prompt('Choose...').toLowerCase()
+    console.log('player chooses', playerSelection) 
 
-let roundScore = playRound(playerSelection, computerSelection)
-console.log(roundScore)
-console.log(playerScore)
-console.log(computerScore)
-function game (playerScore, computerScore) {
-    for (let i = 0; i < 5; i++) {
-        playRound(playerSelection, computerSelection)
-    } if (playerScore < computerScore) {
-        return 'computer wins all'
+    if (playerSelection === computerSelection) {
+        console.log('tie')
+        return 'tie'
+    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        console.log('player wins')
+        ++playerScore
+        return playerScore
+    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+        console.log('computer wins')
+        ++computerScore
+        return computerScore
+    } else if (computerSelection === 'rock' && playerSelection === 'scissors') {
+        console.log('computer wins')
+        ++computerScore
+        return computerScore
+    } else if (computerSelection === 'rock' && playerSelection === 'paper') {
+        console.log('player wins')
+        ++playerScore
+        return playerScore
+    } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
+        console.log('player wins')
+        ++playerScore
+        return playerScore
+    } else if (playerSelection === 'paper' && computerSelection=== 'scissors') {
+        console.log('computer wins')
+        ++computerScore
+        return computerScore
     } else {
-        return 'player wins all'
+        console.log('something is broken')
     }
 }
 
-let gameResults = game(playerSelection, computerSelection)
-console.log(gameResults)
+function game (playerScore, computerScore) {
+    playRound()
+    for (let i = 0; i < 5; i++) {
+        playRound(playerSelection, computerSelection)
+    } if (computerScore == 5) {
+        console.log('computer wins game')
+        return 'computer wins all'
+    } else if (playerScore == 5){
+        console.log('player wins game')
+        return 'player wins all'
+    } else {
+        throw 'game not complete'
+    }
+}
+
+game()

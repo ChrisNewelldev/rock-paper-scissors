@@ -13,55 +13,52 @@ function getComputerChoice (...choices) {
 
 function playRound (playerSelection, computerSelection) {
 
-    computerSelection = getComputerChoice(...choices)
-    console.log('computer chooses', computerSelection)
     playerSelection = prompt('Choose...').toLowerCase()
     console.log('player chooses', playerSelection) 
-
+    computerSelection = getComputerChoice(...choices)
+    console.log('computer chooses', computerSelection)
+    
     if (playerSelection === computerSelection) {
         console.log('tie')
-        return 'tie'
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
         console.log('player wins')
         ++playerScore
-        return playerScore
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
         console.log('computer wins')
         ++computerScore
-        return computerScore
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else if (computerSelection === 'rock' && playerSelection === 'scissors') {
         console.log('computer wins')
         ++computerScore
-        return computerScore
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else if (computerSelection === 'rock' && playerSelection === 'paper') {
         console.log('player wins')
         ++playerScore
-        return playerScore
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
         console.log('player wins')
         ++playerScore
-        return playerScore
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else if (playerSelection === 'paper' && computerSelection=== 'scissors') {
         console.log('computer wins')
         ++computerScore
-        return computerScore
+        console.log('man:', playerScore, 'machine:', computerScore)
     } else {
-        console.log('something is broken')
-    }
+        alert('Please enter Rock, Paper, or Scissors')
+    } 
 }
 
-function game (playerScore, computerScore) {
-    playRound()
-    for (let i = 0; i < 5; i++) {
+function game () {
+    for (let i = 0; i < 3; i++) {
         playRound(playerSelection, computerSelection)
-    } if (computerScore == 5) {
+    } if (computerScore > playerScore) {
         console.log('computer wins game')
-        return 'computer wins all'
-    } else if (playerScore == 5){
+    } else if (playerScore > computerScore){
         console.log('player wins game')
-        return 'player wins all'
     } else {
-        throw 'game not complete'
+        throw 'tie game'
     }
 }
 

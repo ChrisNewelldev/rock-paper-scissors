@@ -6,6 +6,17 @@ let playerSelection;
 let playerScore = 0
 let computerScore = 0
 
+let buttons = document.querySelectorAll(".button")
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+    playerSelection = button.id;
+
+    playRound(playerSelection, computerSelection);
+    })
+})
+
+
 function getComputerChoice (...choices) {
     return choices[Math.floor(Math.random()*choices.length)]
 }
@@ -13,7 +24,7 @@ function getComputerChoice (...choices) {
 
 function playRound (playerSelection, computerSelection) {
 
-    playerSelection = prompt('Choose...').toLowerCase()
+    //playerSelection = 'rock'
     console.log('player chooses', playerSelection) 
     computerSelection = getComputerChoice(...choices)
     console.log('computer chooses', computerSelection)
@@ -46,12 +57,12 @@ function playRound (playerSelection, computerSelection) {
         ++computerScore
         console.log('man:', playerScore, 'machine:', computerScore)
     } else {
-        alert('Please enter Rock, Paper, or Scissors')
+        //alert('Please enter Rock, Paper, or Scissors')
     } 
 }
 
 function game () {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 1000; i++) {
         playRound(playerSelection, computerSelection)
     } if (computerScore > playerScore) {
         console.log('computer wins game')
@@ -62,4 +73,4 @@ function game () {
     }
 }
 
-game()
+//game()
